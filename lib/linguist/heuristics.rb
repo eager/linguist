@@ -392,6 +392,14 @@ module Linguist
       end
     end
 
+    disambiguate ".properties" do |data|
+      if /^#/.match(data)
+        Language["Java Properties"]
+      elsif /^[;\[]/.match(data)
+        Language["INI"]
+      end
+    end
+
     disambiguate ".props" do |data|
       if /^(\s*)(<Project|<Import|<Property|<?xml|xmlns)/i.match(data)
         Language["XML"]
